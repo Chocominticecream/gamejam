@@ -37,3 +37,5 @@ scripts are labelled .gd, they are scripts that are attached to each object that
 
 The theme for the game jam is CHILLED, something icy i suppose, let it go amirite
 
+by the way, it is fine if we cannot make a game in time, all that matters is that we have fun and learn :)
+
