@@ -35,3 +35,5 @@ scenes are not exactly objects but more of a screen containing objects. (A main 
 
 scripts are labelled .gd, they are scripts that are attached to each object that gives it a behavior. self explanatory. These are what you should edit with godot's inbuilt IDE.
 
+The theme for the game jam is CHILLED, something icy i suppose, let it go amirite
+
