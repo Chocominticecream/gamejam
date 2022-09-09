@@ -1,5 +1,6 @@
 extends Area2D
 # since sprite extends area2d
+# this is a test
 
 export (float) var speed = 200;
 #makes the variable avaliable to child processes
