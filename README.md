@@ -39,3 +39,4 @@ The theme for the game jam is CHILLED, something icy i suppose, let it go amirit
 
 by the way, it is fine if we cannot make a game in time, all that matters is that we have fun and learn :)
 
+This is weihaos branch.
