@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-export (int) var speed = 200;
-
+export (int) var speed = 400;
+#hello World
 func _physics_process(delta):
 	var velocity := Vector2() #type of array and is a container actually
 	velocity.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
