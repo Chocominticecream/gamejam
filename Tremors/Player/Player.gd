@@ -9,6 +9,13 @@ func _physics_process(delta):
 	velocity = velocity.normalized();
 	
 	velocity = move_and_slide(velocity * speed);
-
+	var Colors = [Color(0,0,1,1),
+					Color(0,1,0,1),
+					Color(0,1,1,1),
+					Color(1,0,0,1),
+					Color(1,0,1,1),
+					Color(1,1,0,1)] 
+	modulate = Colors[randi() % Colors.size()]
 func _ready():
-	pass # Replace with function body.
+	 pass# Replace with function body.
+	
