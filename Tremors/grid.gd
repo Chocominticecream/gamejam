@@ -1,6 +1,5 @@
 extends Node2D
 
-# position x 130 y 135
 #grid variables
 export (int) var width = 7;
 export (int) var height = 6;
@@ -22,8 +21,6 @@ func make2DArray():
     var array = [];
     for i in width:
         array.append([]);
-        #for j in height:
-            #array[i].append(null);
     return array;
 
 func grid_to_pixel(column, row):
@@ -37,4 +34,7 @@ func ontokendrop(tokenpos):
      if len(allpieces[tokenpos]) < height:
         add_child(piece);
         allpieces[tokenpos].append(piece);
-        piece.position = grid_to_pixel(tokenpos, len(allpieces[tokenpos])-1);
+        piece.position = get_node("/root/Node2D/Player").get_position();
+        #piece.position = grid_to_pixel(tokenpos, len(allpieces[tokenpos])-1);
+        #tweening
+        piece.move(grid_to_pixel(tokenpos, len(allpieces[tokenpos])-1));
