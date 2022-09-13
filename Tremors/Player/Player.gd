@@ -4,7 +4,10 @@ export (int) var speed = 200;
 export (bool) var clamp_to_window_borders = true;
 #numpad position
 export (int) var positioning = 0;
-export (bool) var controlnum = false;
+export (bool) var controlnum = true;
+
+#signal
+signal tokendrop(tokenpos)
 
 onready var screen_borders = Vector2(
 ProjectSettings.get_setting("display/window/size/width"),
@@ -35,10 +38,13 @@ func _input(event):
           positioning = 6;
        self.global_position = Vector2(150 + positioning*100, self.global_position.y);
     
+    if Input.is_action_pressed("ui_select"):
+       emit_signal("tokendrop", positioning);
+    
 func _physics_process(delta):
 # Clamp
     if clamp_to_window_borders:
        global_position = Vector2(clamp(global_position.x, 0, screen_borders.x), clamp(global_position.y, 0, screen_borders.y));
 
 func _ready():
-    pass # Replace with function body.
+    connect("tokendrop", get_node("/root/Node2D/grid"), "ontokendrop")
