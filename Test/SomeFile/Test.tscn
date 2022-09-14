@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="TileSet" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+cell_size = Vector2( 20, 20 )
+format = 1
+
+[node name="TileMap" type="TileMap" parent="TileMap"]
+modulate = Color( 1, 0.00392157, 0.00392157, 1 )
+self_modulate = Color( 0.729412, 0.231373, 0.231373, 1 )
+position = Vector2( 537, 265 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 36, 36 )
+format = 1

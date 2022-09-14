@@ -1,10 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://square-128.png" type="Texture" id=2]
 [ext_resource path="res://arrow.PNG" type="Texture" id=3]
 [ext_resource path="res://Player/Button.gd" type="Script" id=4]
 [ext_resource path="res://1234567.PNG" type="Texture" id=5]
+[ext_resource path="res://Player/List1.gd" type="Script" id=6]
+[ext_resource path="res://Player/List2.gd" type="Script" id=7]
+[ext_resource path="res://Player/List3.gd" type="Script" id=8]
+[ext_resource path="res://Player/List4.gd" type="Script" id=9]
+[ext_resource path="res://Player/List5.gd" type="Script" id=10]
+[ext_resource path="res://Player/List6.gd" type="Script" id=11]
+[ext_resource path="res://Player/List7.gd" type="Script" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Arrow moving up and down"
@@ -301,7 +308,7 @@ scale = Vector2( 0.585273, 0.442733 )
 points = PoolVector2Array( 282, 836, 690.713, 834.325, 770, 834 )
 default_color = Color( 0.4, 0.501961, 1, 1 )
 
-[node name="Button" type="Button" parent="."]
+[node name="Generate Color" type="Button" parent="."]
 margin_left = 13.0
 margin_top = 495.0
 margin_right = 265.0
@@ -310,7 +317,7 @@ action_mode = 0
 text = "Click here to generate a random color"
 script = ExtResource( 4 )
 
-[node name="ColorSquare" type="Polygon2D" parent="Button"]
+[node name="ColorSquare" type="Polygon2D" parent="Generate Color"]
 position = Vector2( -25, -239 )
 scale = Vector2( 0.90244, 0.948717 )
 texture = ExtResource( 3 )
@@ -360,3 +367,353 @@ texture = ExtResource( 3 )
 position = Vector2( 473, 67 )
 scale = Vector2( 1.19651, 1.63158 )
 texture = ExtResource( 5 )
+
+[node name="List1" type="Button" parent="."]
+margin_left = 35.0
+margin_top = 255.0
+margin_right = 55.0
+margin_bottom = 275.0
+text = "1"
+script = ExtResource( 6 )
+
+[node name="Col1Row1" type="Polygon2D" parent="List1"]
+position = Vector2( 0, 1.52588e-05 )
+scale = Vector2( 0.90244, 0.948717 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row2" type="Polygon2D" parent="List1"]
+position = Vector2( 7.12093, -27.0767 )
+scale = Vector2( 0.879877, 0.897435 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 376.051, 282, 335, 282 )
+
+[node name="Col1Row3" type="Polygon2D" parent="List1"]
+position = Vector2( 8.00001, -75 )
+scale = Vector2( 0.878049, 0.923077 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row4" type="Polygon2D" parent="List1"]
+position = Vector2( 9.26852e-06, -107 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row5" type="Polygon2D" parent="List1"]
+position = Vector2( 8.73158, -140.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row6" type="Polygon2D" parent="List1"]
+position = Vector2( 8.73154, -180.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282, 334.464, 261.078 )
+
+[node name="Col1Row7" type="Polygon2D" parent="List1"]
+position = Vector2( 0.585123, -227.077 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="List2" type="Button" parent="."]
+margin_left = 75.0
+margin_top = 255.0
+margin_right = 95.0
+margin_bottom = 275.0
+text = "2"
+script = ExtResource( 7 )
+
+[node name="Col1Row1" type="Polygon2D" parent="List2"]
+position = Vector2( 0, 1.52588e-05 )
+scale = Vector2( 0.90244, 0.948717 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row2" type="Polygon2D" parent="List2"]
+position = Vector2( 7.12093, -27.0767 )
+scale = Vector2( 0.879877, 0.897435 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 376.051, 282, 335, 282 )
+
+[node name="Col1Row3" type="Polygon2D" parent="List2"]
+position = Vector2( 8.00001, -75 )
+scale = Vector2( 0.878049, 0.923077 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row4" type="Polygon2D" parent="List2"]
+position = Vector2( 9.26852e-06, -107 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row5" type="Polygon2D" parent="List2"]
+position = Vector2( 8.73158, -140.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row6" type="Polygon2D" parent="List2"]
+position = Vector2( 8.73154, -180.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282, 334.464, 261.078 )
+
+[node name="Col1Row7" type="Polygon2D" parent="List2"]
+position = Vector2( 0.585123, -227.077 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="List3" type="Button" parent="."]
+margin_left = 115.0
+margin_top = 254.0
+margin_right = 135.0
+margin_bottom = 274.0
+text = "3"
+script = ExtResource( 8 )
+
+[node name="Col1Row1" type="Polygon2D" parent="List3"]
+position = Vector2( 0, 1.52588e-05 )
+scale = Vector2( 0.90244, 0.948717 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row2" type="Polygon2D" parent="List3"]
+position = Vector2( 7.12093, -27.0767 )
+scale = Vector2( 0.879877, 0.897435 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 376.051, 282, 335, 282 )
+
+[node name="Col1Row3" type="Polygon2D" parent="List3"]
+position = Vector2( 8.00001, -75 )
+scale = Vector2( 0.878049, 0.923077 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row4" type="Polygon2D" parent="List3"]
+position = Vector2( 9.26852e-06, -107 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row5" type="Polygon2D" parent="List3"]
+position = Vector2( 8.73158, -140.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row6" type="Polygon2D" parent="List3"]
+position = Vector2( 8.73154, -180.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282, 334.464, 261.078 )
+
+[node name="Col1Row7" type="Polygon2D" parent="List3"]
+position = Vector2( 0.585123, -227.077 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="List4" type="Button" parent="."]
+margin_left = 155.0
+margin_top = 254.0
+margin_right = 175.0
+margin_bottom = 274.0
+text = "4"
+script = ExtResource( 9 )
+
+[node name="Col1Row1" type="Polygon2D" parent="List4"]
+position = Vector2( 0, 1.52588e-05 )
+scale = Vector2( 0.90244, 0.948717 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row2" type="Polygon2D" parent="List4"]
+position = Vector2( 7.12093, -27.0767 )
+scale = Vector2( 0.879877, 0.897435 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 376.051, 282, 335, 282 )
+
+[node name="Col1Row3" type="Polygon2D" parent="List4"]
+position = Vector2( 8.00001, -75 )
+scale = Vector2( 0.878049, 0.923077 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row4" type="Polygon2D" parent="List4"]
+position = Vector2( 9.26852e-06, -107 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row5" type="Polygon2D" parent="List4"]
+position = Vector2( 8.73158, -140.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row6" type="Polygon2D" parent="List4"]
+position = Vector2( 8.73154, -180.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282, 334.464, 261.078 )
+
+[node name="Col1Row7" type="Polygon2D" parent="List4"]
+position = Vector2( 0.585123, -227.077 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="List5" type="Button" parent="."]
+margin_left = 195.0
+margin_top = 254.0
+margin_right = 215.0
+margin_bottom = 274.0
+text = "5"
+script = ExtResource( 10 )
+
+[node name="Col1Row1" type="Polygon2D" parent="List5"]
+position = Vector2( 0, 1.52588e-05 )
+scale = Vector2( 0.90244, 0.948717 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row2" type="Polygon2D" parent="List5"]
+position = Vector2( 7.12093, -27.0767 )
+scale = Vector2( 0.879877, 0.897435 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 376.051, 282, 335, 282 )
+
+[node name="Col1Row3" type="Polygon2D" parent="List5"]
+position = Vector2( 8.00001, -75 )
+scale = Vector2( 0.878049, 0.923077 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row4" type="Polygon2D" parent="List5"]
+position = Vector2( 9.26852e-06, -107 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row5" type="Polygon2D" parent="List5"]
+position = Vector2( 8.73158, -140.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row6" type="Polygon2D" parent="List5"]
+position = Vector2( 8.73154, -180.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282, 334.464, 261.078 )
+
+[node name="Col1Row7" type="Polygon2D" parent="List5"]
+position = Vector2( 0.585123, -227.077 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="List6" type="Button" parent="."]
+margin_left = 235.0
+margin_top = 255.0
+margin_right = 255.0
+margin_bottom = 275.0
+text = "6"
+script = ExtResource( 11 )
+
+[node name="Col1Row1" type="Polygon2D" parent="List6"]
+position = Vector2( 0, 1.52588e-05 )
+scale = Vector2( 0.90244, 0.948717 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row2" type="Polygon2D" parent="List6"]
+position = Vector2( 7.12093, -27.0767 )
+scale = Vector2( 0.879877, 0.897435 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 376.051, 282, 335, 282 )
+
+[node name="Col1Row3" type="Polygon2D" parent="List6"]
+position = Vector2( 8.00001, -75 )
+scale = Vector2( 0.878049, 0.923077 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row4" type="Polygon2D" parent="List6"]
+position = Vector2( 9.26852e-06, -107 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row5" type="Polygon2D" parent="List6"]
+position = Vector2( 8.73158, -140.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row6" type="Polygon2D" parent="List6"]
+position = Vector2( 8.73154, -180.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282, 334.464, 261.078 )
+
+[node name="Col1Row7" type="Polygon2D" parent="List6"]
+position = Vector2( 0.585123, -227.077 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="List7" type="Button" parent="."]
+margin_left = 275.0
+margin_top = 254.0
+margin_right = 295.0
+margin_bottom = 274.0
+text = "7"
+script = ExtResource( 12 )
+
+[node name="Col1Row1" type="Polygon2D" parent="List7"]
+position = Vector2( 0, 1.52588e-05 )
+scale = Vector2( 0.90244, 0.948717 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row2" type="Polygon2D" parent="List7"]
+position = Vector2( 7.12093, -27.0767 )
+scale = Vector2( 0.879877, 0.897435 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 376.051, 282, 335, 282 )
+
+[node name="Col1Row3" type="Polygon2D" parent="List7"]
+position = Vector2( 8.00001, -75 )
+scale = Vector2( 0.878049, 0.923077 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row4" type="Polygon2D" parent="List7"]
+position = Vector2( 9.26852e-06, -107 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row5" type="Polygon2D" parent="List7"]
+position = Vector2( 8.73158, -140.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
+
+[node name="Col1Row6" type="Polygon2D" parent="List7"]
+position = Vector2( 8.73154, -180.846 )
+scale = Vector2( 0.878049, 0.871795 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282, 334.464, 261.078 )
+
+[node name="Col1Row7" type="Polygon2D" parent="List7"]
+position = Vector2( 0.585123, -227.077 )
+scale = Vector2( 0.90244, 0.897436 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 334, 243, 375, 243, 375, 282, 335, 282 )
