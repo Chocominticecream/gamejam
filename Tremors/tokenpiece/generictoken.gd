@@ -1,5 +1,8 @@
 extends Node2D
 
+#bluetoken color
+#4daebe
+
 var TweenNode;
 var matched = false;
 
