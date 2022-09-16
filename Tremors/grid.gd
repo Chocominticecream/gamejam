@@ -18,7 +18,9 @@ var possiblepieces = [
     preload("res://tokenpiece/greentoken.tscn"),
     preload("res://tokenpiece/purpletoken.tscn")
    ];
+#this array stores all pieces
 var allpieces = [];
+#this array stores the single instanced piece held by the player
 var storedpiece = [];
 var rng = RandomNumberGenerator.new()
 var rngno2 = RandomNumberGenerator.new()
@@ -135,7 +137,10 @@ func ontokendrop(tokenpos):
              updatepositions();
              findmatches();
      storedpiece.clear()
+     #button enabler
      get_node("/root/Node2D/Button").disabled = false
+     get_node("/root/Node2D/Button/debugblue").disabled = false
+     get_node("/root/Node2D/Button/debugred").disabled = false
     
 #function for updating piece position
 func onplayermove(positioner):
@@ -173,12 +178,15 @@ func checkfalse():
     
 func randomdrop():
     pass
-                
+
+#generator button                
 func _on_Button_pressed():
      rng.randomize()
      value = rng.randi_range(0,4)
      emit_signal("colorchange", possiblepieces[value].instance())
      get_node("/root/Node2D/Button").disabled = true
+     get_node("/root/Node2D/Button/debugblue").disabled = true
+     get_node("/root/Node2D/Button/debugred").disabled = true
      abletogen = false;
      
      #spawn piece at player pos
@@ -187,12 +195,27 @@ func _on_Button_pressed():
      piece.position = get_node("/root/Node2D/Player").get_position();
      storedpiece.append(piece);
 
-#func _on_debugblue_pressed():
-#     storedpiece.clear()
-#     storedpiece.append(possiblepieces[0].instance())
-#     emit_signal("colorchange", possiblepieces[0].instance())
-#
-#func _on_debugred_pressed():
-#     storedpiece.clear()
-#     storedpiece.append(possiblepieces[1].instance())
-#     emit_signal("colorchange", possiblepieces[1].instance())
+#debug buttons with boilerplate code
+func _on_debugblue_pressed():
+     get_node("/root/Node2D/Button").disabled = true
+     get_node("/root/Node2D/Button/debugblue").disabled = true
+     get_node("/root/Node2D/Button/debugred").disabled = true
+     abletogen = false;
+    
+     var piece = possiblepieces[0].instance()
+     add_child(piece);
+     piece.position = get_node("/root/Node2D/Player").get_position();
+     storedpiece.append(piece);
+     emit_signal("colorchange", possiblepieces[0].instance())
+
+func _on_debugred_pressed():
+     get_node("/root/Node2D/Button").disabled = true
+     get_node("/root/Node2D/Button/debugblue").disabled = true
+     get_node("/root/Node2D/Button/debugred").disabled = true
+     abletogen = false;
+    
+     var piece = possiblepieces[1].instance()
+     add_child(piece);
+     piece.position = get_node("/root/Node2D/Player").get_position();
+     storedpiece.append(piece);
+     emit_signal("colorchange", possiblepieces[1].instance())
