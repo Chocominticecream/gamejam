@@ -13,10 +13,16 @@ export (int) var value = 0;
 signal colorchange(color)
 var possiblepieces = [
     preload("res://tokenpiece/bluetoken.tscn"),
-    preload("res://tokenpiece/redtoken.tscn")
+    preload("res://tokenpiece/redtoken.tscn"),
+    preload("res://tokenpiece/yellowtoken.tscn"),
+    preload("res://tokenpiece/greentoken.tscn"),
+    preload("res://tokenpiece/purpletoken.tscn")
    ];
 var allpieces = [];
+var storedpiece = [];
 var rng = RandomNumberGenerator.new()
+var rngno2 = RandomNumberGenerator.new()
+var abletogen = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -105,21 +111,21 @@ func findmatches():
                              allpieces[i+1][j-1].matched = true;
                              allpieces[i-1][j+1].matched = true;
                  
-
+#function for token dropping
 func ontokendrop(tokenpos):
-     #delay between presses
-     var piece = possiblepieces[value].instance()
+   if abletogen == false:
+     abletogen = true;
+     var piece = storedpiece[0]
      if len(allpieces[tokenpos]) < height:
-        add_child(piece);
+        #append piece to grid
         allpieces[tokenpos].append(piece);
-        piece.position = get_node("/root/Node2D/Player").get_position();
-        #piece.position = grid_to_pixel(tokenpos, len(allpieces[tokenpos])-1);
         #tweening
         piece.move(grid_to_pixel(tokenpos, len(allpieces[tokenpos])-1));
+        #after tweening, change parent and position
         #small delay then find match
         yield(get_tree().create_timer(0.7), "timeout")
         findmatches();
-        #check false checks if there are avaliable destructible tokens
+        #token destruction loop, check false checks if there are avaliable destructible tokens
         while checkfalse() == true:
              #short delays to simulate token falling
              #this timer is a reference and is destroyed once its executed!
@@ -128,6 +134,13 @@ func ontokendrop(tokenpos):
              yield(get_tree().create_timer(0.1), "timeout")
              updatepositions();
              findmatches();
+     storedpiece.clear()
+     get_node("/root/Node2D/Button").disabled = false
+    
+#function for updating piece position
+func onplayermove(positioner):
+     if storedpiece.size() > 0:
+        storedpiece[0].position.x = 150 + positioner*100
         
 #update tokens and simulate falling of tokens
 func updatepositions():
@@ -157,16 +170,29 @@ func checkfalse():
             if allpieces[i][j].matched == true:
                 return true;
     return false;
+    
+func randomdrop():
+    pass
                 
 func _on_Button_pressed():
      rng.randomize()
-     value = rng.randi_range(0,1)
+     value = rng.randi_range(0,4)
      emit_signal("colorchange", possiblepieces[value].instance())
+     get_node("/root/Node2D/Button").disabled = true
+     abletogen = false;
+     
+     #spawn piece at player pos
+     var piece = possiblepieces[value].instance()
+     add_child(piece);
+     piece.position = get_node("/root/Node2D/Player").get_position();
+     storedpiece.append(piece);
 
-func _on_debugblue_pressed():
-     value = 0;
-     emit_signal("colorchange", possiblepieces[value].instance())
-
-func _on_debugred_pressed():
-     value = 1;
-     emit_signal("colorchange", possiblepieces[value].instance())
+#func _on_debugblue_pressed():
+#     storedpiece.clear()
+#     storedpiece.append(possiblepieces[0].instance())
+#     emit_signal("colorchange", possiblepieces[0].instance())
+#
+#func _on_debugred_pressed():
+#     storedpiece.clear()
+#     storedpiece.append(possiblepieces[1].instance())
+#     emit_signal("colorchange", possiblepieces[1].instance())

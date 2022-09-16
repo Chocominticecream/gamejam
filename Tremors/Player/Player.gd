@@ -8,6 +8,7 @@ export (bool) var controlnum = true;
 
 #signal
 signal tokendrop(tokenpos)
+signal changepiecepos(positioner);
 
 onready var screen_borders = Vector2(
 ProjectSettings.get_setting("display/window/size/width"),
@@ -37,9 +38,12 @@ func _input(event):
        elif Input.is_action_pressed("7"):
           positioning = 6;
        self.global_position = Vector2(150 + positioning*100, self.global_position.y);
+       emit_signal("changepiecepos", positioning);
     
     if Input.is_action_pressed("ui_select"):
        emit_signal("tokendrop", positioning);
+    
+    get_node("indicatorlabel").text = str(positioning+1)
     
 func _physics_process(delta):
 # Clamp
@@ -48,3 +52,4 @@ func _physics_process(delta):
 
 func _ready():
     connect("tokendrop", get_node("/root/Node2D/grid"), "ontokendrop")
+    connect("changepiecepos", get_node("/root/Node2D/grid"), "onplayermove")
