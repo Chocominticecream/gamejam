@@ -8,15 +8,16 @@ export (int) var y_start = 650;
 export (int) var offset = 100;
 export (int) var value = 0;
 
+#non adjustable variables
 #signal
 signal colorchange(color)
-
 var possiblepieces = [
     preload("res://tokenpiece/bluetoken.tscn"),
     preload("res://tokenpiece/redtoken.tscn")
    ];
 var allpieces = [];
 var rng = RandomNumberGenerator.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     allpieces = make2DArray();
@@ -36,6 +37,7 @@ func grid_to_pixel(column, row):
     var new_x = x_start + offset * column;
     var new_y = y_start + -offset * row;
     return Vector2(new_x, new_y);
+    
 #testing code
 func match_at(i,j, color):
   if i > 1:
@@ -46,6 +48,7 @@ func match_at(i,j, color):
      if allpieces[i][j-1] != null && allpieces[i][j-2] != null:
         if allpieces[i][j-1].color == color && allpieces[i][j-2].color == color:
             return true;
+            
 #find matches           
 func findmatches():
     for i in width:
@@ -66,14 +69,6 @@ func findmatches():
                              allpieces[i][j].matched = true;
                              allpieces[i+1][j].matched = true;
                              allpieces[i-1][j].matched = true;
-                             allpieces[i][j].queue_free();
-                             allpieces[i+1][j].queue_free();
-                             allpieces[i-1][j].queue_free();
-                             allpieces[i].remove(j);
-                             allpieces[i+1].remove(j);
-                             allpieces[i-1].remove(j);
-                             updatepositions();
-                             break
                             
                  #match up and down
                  if j >= 1 && j < height-1:
@@ -86,15 +81,7 @@ func findmatches():
                              allpieces[i][j].matched = true;
                              allpieces[i][j+1].matched = true;
                              allpieces[i][j-1].matched = true;
-                             allpieces[i][j].queue_free();
-                             allpieces[i][j+1].queue_free();
-                             allpieces[i][j-1].queue_free();
-                             allpieces[i].remove(j+1);
-                             allpieces[i].remove(j);
-                             allpieces[i].remove(j-1);
-                             updatepositions();
-                             break
-                            
+                             
                  #match diagonals pt 1
                  if i >= 1 && i < width-1 && j >= 1 && j < height-1:
                      if len(allpieces[i-1]) > j-1 && len(allpieces[i+1]) > j+1:
@@ -132,14 +119,45 @@ func ontokendrop(tokenpos):
         #small delay then find match
         yield(get_tree().create_timer(0.7), "timeout")
         findmatches();
-
+        #check false checks if there are avaliable destructible tokens
+        while checkfalse() == true:
+             #short delays to simulate token falling
+             #this timer is a reference and is destroyed once its executed!
+             yield(get_tree().create_timer(0.1), "timeout")
+             removetokens();
+             yield(get_tree().create_timer(0.1), "timeout")
+             updatepositions();
+             findmatches();
+        
+#update tokens and simulate falling of tokens
 func updatepositions():
      for i in width:
+        for j in len(allpieces[i]):            
+               allpieces[i][j].position =  grid_to_pixel(i, j); 
+            
+#destroy tokens   
+func removetokens():
+    #deepcopy
+    var dummy = []
+    for i in width:
+        dummy.append([])
+        for j in range (len(allpieces[i])):
+            dummy[i].append(allpieces[i][j].matched)
+            
+    for i in width:
+        for j in range(len(dummy[i])-1, -1 , -1):
+            if dummy[i][j] == true:
+                allpieces[i][j].queue_free()
+                allpieces[i].remove(j)
+                
+#checks if theres any matched true tokens, if there is none end the token destruction loop               
+func checkfalse():
+    for i in width:
         for j in len(allpieces[i]):
-            yield(get_tree().create_timer(0.05), "timeout")
-            allpieces[i][j].position =  grid_to_pixel(i, j); 
-            findmatches();
-
+            if allpieces[i][j].matched == true:
+                return true;
+    return false;
+                
 func _on_Button_pressed():
      rng.randomize()
      value = rng.randi_range(0,1)
