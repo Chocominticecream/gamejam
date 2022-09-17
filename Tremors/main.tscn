@@ -74,6 +74,27 @@ margin_right = 100.0
 margin_bottom = 94.0
 text = "red"
 
+[node name="debugyellow" type="Button" parent="Button"]
+margin_left = 112.0
+margin_top = 74.0
+margin_right = 154.0
+margin_bottom = 94.0
+text = "yellow"
+
+[node name="debuggreen" type="Button" parent="Button"]
+margin_left = 2.0
+margin_top = 105.0
+margin_right = 47.0
+margin_bottom = 125.0
+text = "green"
+
+[node name="debugpurple" type="Button" parent="Button"]
+margin_left = 60.0
+margin_top = 106.0
+margin_right = 101.0
+margin_bottom = 126.0
+text = "purple"
+
 [node name="colorindicator" type="Label" parent="Button"]
 margin_left = 4.0
 margin_top = -69.0
@@ -87,3 +108,6 @@ script = ExtResource( 5 )
 [connection signal="pressed" from="Button" to="grid" method="_on_Button_pressed"]
 [connection signal="pressed" from="Button/debugblue" to="grid" method="_on_debugblue_pressed"]
 [connection signal="pressed" from="Button/debugred" to="grid" method="_on_debugred_pressed"]
+[connection signal="pressed" from="Button/debugyellow" to="grid" method="_on_debugyellow_pressed"]
+[connection signal="pressed" from="Button/debuggreen" to="grid" method="_on_debuggreen_pressed"]
+[connection signal="pressed" from="Button/debugpurple" to="grid" method="_on_debugpurple_pressed"]

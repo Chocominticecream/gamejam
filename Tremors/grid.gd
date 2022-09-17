@@ -11,6 +11,8 @@ export (int) var value = 0;
 #non adjustable variables
 #signal
 signal colorchange(color)
+
+#preload the tokens into an array
 var possiblepieces = [
     preload("res://tokenpiece/bluetoken.tscn"),
     preload("res://tokenpiece/redtoken.tscn"),
@@ -64,54 +66,62 @@ func findmatches():
               if allpieces[i][j] != null:  
                  var current = allpieces[i][j].color;
                  #match right and left
-                 if i >= 1 && i < width-1:
+                 if i >= 1 && i < width-2:
                     #check to see if current token height is lesser than the number of tokens beside it
-                    if len(allpieces[i-1]) > j && len(allpieces[i+1]) > j:
+                    if len(allpieces[i-1]) > j && len(allpieces[i+1]) > j && len(allpieces[i+2]) > j:
                       #check for null
-                      if allpieces[i-1][j] != null &&  allpieces[i+1][j] != null:
+                      if allpieces[i-1][j] != null &&  allpieces[i+1][j] != null  &&  allpieces[i+2][j] != null:
                         #compare colors
-                        if allpieces[i-1][j].color == current && allpieces[i+1][j].color == current:
+                        if allpieces[i-1][j].color == current && allpieces[i+1][j].color == current && allpieces[i+2][j].color == current:
                              allpieces[i][j].dim();
                              allpieces[i+1][j].dim();
+                             allpieces[i+2][j].dim();
                              allpieces[i-1][j].dim();
                              allpieces[i][j].matched = true;
                              allpieces[i+1][j].matched = true;
                              allpieces[i-1][j].matched = true;
+                             allpieces[i+2][j].matched = true;
                             
                  #match up and down
-                 if j >= 1 && j < height-1:
-                    if j+1 < len(allpieces[i]):
-                      if allpieces[i][j+1] != null &&  allpieces[i][j-1] != null:
-                        if allpieces[i][j+1].color == current && allpieces[i][j-1].color == current:
+                 if j >= 1 && j < height-2:
+                    if j+2 < len(allpieces[i]):
+                      if allpieces[i][j+1] != null &&  allpieces[i][j-1] != null  &&  allpieces[i][j+2] != null:
+                        if allpieces[i][j+1].color == current && allpieces[i][j-1].color == current && allpieces[i][j+2].color == current:
                              allpieces[i][j].dim();
                              allpieces[i][j+1].dim();
+                             allpieces[i][j+2].dim();
                              allpieces[i][j-1].dim();
                              allpieces[i][j].matched = true;
                              allpieces[i][j+1].matched = true;
+                             allpieces[i][j+2].matched = true;
                              allpieces[i][j-1].matched = true;
                              
                  #match diagonals pt 1
-                 if i >= 1 && i < width-1 && j >= 1 && j < height-1:
-                     if len(allpieces[i-1]) > j-1 && len(allpieces[i+1]) > j+1:
-                        if allpieces[i+1][j+1] != null &&  allpieces[i-1][j-1] != null:
-                          if allpieces[i+1][j+1].color == current && allpieces[i-1][j-1].color == current:
+                 if i >= 1 && i < width-2 && j >= 1 && j < height-2:
+                     if len(allpieces[i-1]) > j-1 && len(allpieces[i+1]) > j+1 && len(allpieces[i+2]) > j+2:
+                        if allpieces[i+1][j+1] != null &&  allpieces[i-1][j-1] != null && allpieces[i+2][j+2] != null:
+                          if allpieces[i+1][j+1].color == current && allpieces[i-1][j-1].color == current && allpieces[i+2][j+2].color == current:
                              allpieces[i][j].dim();
                              allpieces[i+1][j+1].dim();
                              allpieces[i-1][j-1].dim();
+                             allpieces[i+2][j+2].dim();
                              allpieces[i][j].matched = true;
                              allpieces[i+1][j+1].matched = true;
                              allpieces[i-1][j-1].matched = true;
+                             allpieces[i+2][j+2].matched = true;
                  #match diagonals pt 2
-                 if i >= 1 && i < width-1 && j >= 1 && j < height-1:
-                     if len(allpieces[i-1]) > j+1 && len(allpieces[i+1]) > j-1:
-                        if allpieces[i+1][j-1] != null &&  allpieces[i-1][j+1] != null:
-                          if allpieces[i+1][j-1].color == current && allpieces[i-1][j+1].color == current:
+                 if i >= 2 && i < width-1 && j >= 1 && j < height-2:
+                     if len(allpieces[i-1]) > j+1 && len(allpieces[i+1]) > j-1 &&  len(allpieces[i-2]) > j+2:
+                        if allpieces[i+1][j-1] != null &&  allpieces[i-1][j+1] != null && allpieces[i-2][j+2] != null:
+                          if allpieces[i+1][j-1].color == current && allpieces[i-1][j+1].color == current && allpieces[i-2][j+2].color == current:
                              allpieces[i][j].dim();
                              allpieces[i+1][j-1].dim();
                              allpieces[i-1][j+1].dim();
+                             allpieces[i-2][j+2].dim();
                              allpieces[i][j].matched = true;
                              allpieces[i+1][j-1].matched = true;
                              allpieces[i-1][j+1].matched = true;
+                             allpieces[i-2][j+2].matched = true;
                  
 #function for token dropping
 func ontokendrop(tokenpos):
@@ -127,7 +137,18 @@ func ontokendrop(tokenpos):
         #small delay then find match
         yield(get_tree().create_timer(0.7), "timeout")
         findmatches();
+        #normal drop turn
         #token destruction loop, check false checks if there are avaliable destructible tokens
+        while checkfalse() == true:
+             #short delays to simulate token falling
+             #this timer is a reference and is destroyed once its executed!
+             yield(get_tree().create_timer(0.1), "timeout")
+             removetokens();
+             yield(get_tree().create_timer(0.1), "timeout")
+             updatepositions();
+             findmatches();
+        #on random drop
+        randomdrop();
         while checkfalse() == true:
              #short delays to simulate token falling
              #this timer is a reference and is destroyed once its executed!
@@ -141,16 +162,20 @@ func ontokendrop(tokenpos):
      get_node("/root/Node2D/Button").disabled = false
      get_node("/root/Node2D/Button/debugblue").disabled = false
      get_node("/root/Node2D/Button/debugred").disabled = false
+     get_node("/root/Node2D/Button/debugyellow").disabled = false
+     get_node("/root/Node2D/Button/debuggreen").disabled = false
+     get_node("/root/Node2D/Button/debugpurple").disabled = false
     
 #function for updating piece position
 func onplayermove(positioner):
-     if storedpiece.size() > 0:
+     #weakref checks if piece is freed
+     if storedpiece.size() > 0 && weakref(storedpiece[0]).get_ref():
         storedpiece[0].position.x = 150 + positioner*100
         
 #update tokens and simulate falling of tokens
 func updatepositions():
      for i in width:
-        for j in len(allpieces[i]):            
+        for j in len(allpieces[i]):             
                allpieces[i][j].position =  grid_to_pixel(i, j); 
             
 #destroy tokens   
@@ -175,9 +200,20 @@ func checkfalse():
             if allpieces[i][j].matched == true:
                 return true;
     return false;
-    
+
+#random token drop
 func randomdrop():
-    pass
+    rng.randomize()
+    rngno2.randomize()
+    var colordrop = rng.randi_range(0,4)
+    var posdrop = rng.randi_range(0,6)
+    if len(allpieces[posdrop]) < height+1:
+       var piece = possiblepieces[colordrop].instance()
+       add_child(piece)
+       piece.position.x = 150 + (posdrop * 100)
+       piece.position.y = -100
+       allpieces[posdrop].append(piece);
+       piece.move(grid_to_pixel(posdrop, len(allpieces[posdrop])-1));
 
 #generator button                
 func _on_Button_pressed():
@@ -187,6 +223,9 @@ func _on_Button_pressed():
      get_node("/root/Node2D/Button").disabled = true
      get_node("/root/Node2D/Button/debugblue").disabled = true
      get_node("/root/Node2D/Button/debugred").disabled = true
+     get_node("/root/Node2D/Button/debugyellow").disabled = true
+     get_node("/root/Node2D/Button/debuggreen").disabled = true
+     get_node("/root/Node2D/Button/debugpurple").disabled = true
      abletogen = false;
      
      #spawn piece at player pos
@@ -200,6 +239,9 @@ func _on_debugblue_pressed():
      get_node("/root/Node2D/Button").disabled = true
      get_node("/root/Node2D/Button/debugblue").disabled = true
      get_node("/root/Node2D/Button/debugred").disabled = true
+     get_node("/root/Node2D/Button/debugyellow").disabled = true
+     get_node("/root/Node2D/Button/debuggreen").disabled = true
+     get_node("/root/Node2D/Button/debugpurple").disabled = true
      abletogen = false;
     
      var piece = possiblepieces[0].instance()
@@ -212,6 +254,9 @@ func _on_debugred_pressed():
      get_node("/root/Node2D/Button").disabled = true
      get_node("/root/Node2D/Button/debugblue").disabled = true
      get_node("/root/Node2D/Button/debugred").disabled = true
+     get_node("/root/Node2D/Button/debugyellow").disabled = true
+     get_node("/root/Node2D/Button/debuggreen").disabled = true
+     get_node("/root/Node2D/Button/debugpurple").disabled = true
      abletogen = false;
     
      var piece = possiblepieces[1].instance()
@@ -219,3 +264,60 @@ func _on_debugred_pressed():
      piece.position = get_node("/root/Node2D/Player").get_position();
      storedpiece.append(piece);
      emit_signal("colorchange", possiblepieces[1].instance())
+    
+func _on_debugyellow_pressed():
+     get_node("/root/Node2D/Button").disabled = true
+     get_node("/root/Node2D/Button/debugblue").disabled = true
+     get_node("/root/Node2D/Button/debugred").disabled = true
+     get_node("/root/Node2D/Button/debugyellow").disabled = true
+     get_node("/root/Node2D/Button/debuggreen").disabled = true
+     get_node("/root/Node2D/Button/debugpurple").disabled = true
+     abletogen = false;
+    
+     var piece = possiblepieces[2].instance()
+     add_child(piece);
+     piece.position = get_node("/root/Node2D/Player").get_position();
+     storedpiece.append(piece);
+     emit_signal("colorchange", possiblepieces[2].instance())
+
+
+func _on_debuggreen_pressed():
+     get_node("/root/Node2D/Button").disabled = true
+     get_node("/root/Node2D/Button/debugblue").disabled = true
+     get_node("/root/Node2D/Button/debugred").disabled = true
+     get_node("/root/Node2D/Button/debugyellow").disabled = true
+     get_node("/root/Node2D/Button/debuggreen").disabled = true
+     get_node("/root/Node2D/Button/debugpurple").disabled = true
+     abletogen = false;
+    
+     var piece = possiblepieces[3].instance()
+     add_child(piece);
+     piece.position = get_node("/root/Node2D/Player").get_position();
+     storedpiece.append(piece);
+     emit_signal("colorchange", possiblepieces[3].instance())
+
+
+func _on_debugpurple_pressed():
+     get_node("/root/Node2D/Button").disabled = true
+     get_node("/root/Node2D/Button/debugblue").disabled = true
+     get_node("/root/Node2D/Button/debugred").disabled = true
+     get_node("/root/Node2D/Button/debugyellow").disabled = true
+     get_node("/root/Node2D/Button/debuggreen").disabled = true
+     get_node("/root/Node2D/Button/debugpurple").disabled = true
+     abletogen = false;
+    
+     var piece = possiblepieces[4].instance()
+     add_child(piece);
+     piece.position = get_node("/root/Node2D/Player").get_position();
+     storedpiece.append(piece);
+     emit_signal("colorchange", possiblepieces[4].instance())
+
+#polish plans:
+#new vector art
+#fix blurriness and jaggedness if possible
+#new better font
+#options to toggle between numpad and arrow keys
+#game over screen
+
+
+

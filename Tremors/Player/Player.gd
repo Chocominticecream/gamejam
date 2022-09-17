@@ -38,7 +38,7 @@ func _input(event):
        elif Input.is_action_pressed("7"):
           positioning = 6;
        self.global_position = Vector2(150 + positioning*100, self.global_position.y);
-       emit_signal("changepiecepos", positioning);
+    emit_signal("changepiecepos", positioning);
     
     if Input.is_action_pressed("ui_select"):
        emit_signal("tokendrop", positioning);
