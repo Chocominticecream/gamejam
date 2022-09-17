@@ -126,7 +126,6 @@ func findmatches():
 #function for token dropping
 func ontokendrop(tokenpos):
    if abletogen == false:
-     abletogen = true;
      var piece = storedpiece[0]
      if len(allpieces[tokenpos]) < height:
         #append piece to grid
@@ -157,14 +156,15 @@ func ontokendrop(tokenpos):
              yield(get_tree().create_timer(0.1), "timeout")
              updatepositions();
              findmatches();
-     storedpiece.clear()
-     #button enabler
-     get_node("/root/Node2D/Button").disabled = false
-     get_node("/root/Node2D/Button/debugblue").disabled = false
-     get_node("/root/Node2D/Button/debugred").disabled = false
-     get_node("/root/Node2D/Button/debugyellow").disabled = false
-     get_node("/root/Node2D/Button/debuggreen").disabled = false
-     get_node("/root/Node2D/Button/debugpurple").disabled = false
+        storedpiece.clear()
+        abletogen = true;
+        #button enabler
+        get_node("/root/Node2D/Button").disabled = false
+        get_node("/root/Node2D/Button/debugblue").disabled = false
+        get_node("/root/Node2D/Button/debugred").disabled = false
+        get_node("/root/Node2D/Button/debugyellow").disabled = false
+        get_node("/root/Node2D/Button/debuggreen").disabled = false
+        get_node("/root/Node2D/Button/debugpurple").disabled = false
     
 #function for updating piece position
 func onplayermove(positioner):
@@ -207,6 +207,8 @@ func randomdrop():
     rngno2.randomize()
     var colordrop = rng.randi_range(0,4)
     var posdrop = rng.randi_range(0,6)
+    while len(allpieces[posdrop]) == height+1:
+        posdrop = rng.randi_range(0,6)
     if len(allpieces[posdrop]) < height+1:
        var piece = possiblepieces[colordrop].instance()
        add_child(piece)

@@ -41,7 +41,7 @@ func _input(event):
     emit_signal("changepiecepos", positioning);
     
     if Input.is_action_pressed("ui_select"):
-       emit_signal("tokendrop", positioning);
+          emit_signal("tokendrop", positioning);
     
     get_node("indicatorlabel").text = str(positioning+1)
     
