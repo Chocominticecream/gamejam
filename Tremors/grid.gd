@@ -11,6 +11,7 @@ export (int) var value = 0;
 #non adjustable variables
 #signal
 signal colorchange(color)
+signal gameover(score)
 
 #preload the tokens into an array
 var possiblepieces = [
@@ -27,13 +28,20 @@ var storedpiece = [];
 var rng = RandomNumberGenerator.new()
 var rngno2 = RandomNumberGenerator.new()
 var abletogen = true
+var gameoverval = false
+
+#combo and score checks
+var cascade = 1
+var score = 0
+var tokensdestroyed = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     allpieces = make2DArray();
     print(allpieces);
     #test signal
-    connect("colorchange", get_node("/root/Node2D/Button/colorindicator"), "colorchanger")
+    connect("colorchange", get_node("/root/Node2D/colorindicator"), "colorchanger")
+    connect("gameover", get_node("/root/Node2D/gameover"), "setgameover")
 
 #create2d array
 func make2DArray():
@@ -66,68 +74,60 @@ func findmatches():
               if allpieces[i][j] != null:  
                  var current = allpieces[i][j].color;
                  #match right and left
-                 if i >= 1 && i < width-2:
+                 if i >= 1 && i < width-1:
                     #check to see if current token height is lesser than the number of tokens beside it
-                    if len(allpieces[i-1]) > j && len(allpieces[i+1]) > j && len(allpieces[i+2]) > j:
+                    if len(allpieces[i-1]) > j && len(allpieces[i+1]) > j:
                       #check for null
-                      if allpieces[i-1][j] != null &&  allpieces[i+1][j] != null  &&  allpieces[i+2][j] != null:
+                      if allpieces[i-1][j] != null &&  allpieces[i+1][j] != null:
                         #compare colors
-                        if allpieces[i-1][j].color == current && allpieces[i+1][j].color == current && allpieces[i+2][j].color == current:
+                        if allpieces[i-1][j].color == current && allpieces[i+1][j].color == current:
                              allpieces[i][j].dim();
                              allpieces[i+1][j].dim();
-                             allpieces[i+2][j].dim();
                              allpieces[i-1][j].dim();
                              allpieces[i][j].matched = true;
                              allpieces[i+1][j].matched = true;
                              allpieces[i-1][j].matched = true;
-                             allpieces[i+2][j].matched = true;
                             
                  #match up and down
-                 if j >= 1 && j < height-2:
-                    if j+2 < len(allpieces[i]):
-                      if allpieces[i][j+1] != null &&  allpieces[i][j-1] != null  &&  allpieces[i][j+2] != null:
-                        if allpieces[i][j+1].color == current && allpieces[i][j-1].color == current && allpieces[i][j+2].color == current:
+                 if j >= 1 && j < height-1:
+                    if j+1 < len(allpieces[i]):
+                      if allpieces[i][j+1] != null &&  allpieces[i][j-1] != null:
+                        if allpieces[i][j+1].color == current && allpieces[i][j-1].color == current:
                              allpieces[i][j].dim();
                              allpieces[i][j+1].dim();
-                             allpieces[i][j+2].dim();
                              allpieces[i][j-1].dim();
                              allpieces[i][j].matched = true;
                              allpieces[i][j+1].matched = true;
-                             allpieces[i][j+2].matched = true;
                              allpieces[i][j-1].matched = true;
                              
                  #match diagonals pt 1
-                 if i >= 1 && i < width-2 && j >= 1 && j < height-2:
-                     if len(allpieces[i-1]) > j-1 && len(allpieces[i+1]) > j+1 && len(allpieces[i+2]) > j+2:
-                        if allpieces[i+1][j+1] != null &&  allpieces[i-1][j-1] != null && allpieces[i+2][j+2] != null:
-                          if allpieces[i+1][j+1].color == current && allpieces[i-1][j-1].color == current && allpieces[i+2][j+2].color == current:
+                 if i >= 1 && i < width-1 && j >= 1 && j < height-1:
+                     if len(allpieces[i-1]) > j-1 && len(allpieces[i+1]) > j+1:
+                        if allpieces[i+1][j+1] != null &&  allpieces[i-1][j-1] != null:
+                          if allpieces[i+1][j+1].color == current && allpieces[i-1][j-1].color == current:
                              allpieces[i][j].dim();
                              allpieces[i+1][j+1].dim();
                              allpieces[i-1][j-1].dim();
-                             allpieces[i+2][j+2].dim();
                              allpieces[i][j].matched = true;
                              allpieces[i+1][j+1].matched = true;
                              allpieces[i-1][j-1].matched = true;
-                             allpieces[i+2][j+2].matched = true;
                  #match diagonals pt 2
-                 if i >= 2 && i < width-1 && j >= 1 && j < height-2:
-                     if len(allpieces[i-1]) > j+1 && len(allpieces[i+1]) > j-1 &&  len(allpieces[i-2]) > j+2:
-                        if allpieces[i+1][j-1] != null &&  allpieces[i-1][j+1] != null && allpieces[i-2][j+2] != null:
-                          if allpieces[i+1][j-1].color == current && allpieces[i-1][j+1].color == current && allpieces[i-2][j+2].color == current:
+                 if i >= 1 && i < width-1 && j >= 1 && j < height-1:
+                     if len(allpieces[i-1]) > j+1 && len(allpieces[i+1]) > j-1:
+                        if allpieces[i+1][j-1] != null &&  allpieces[i-1][j+1] != null:
+                          if allpieces[i+1][j-1].color == current && allpieces[i-1][j+1].color == current:
                              allpieces[i][j].dim();
                              allpieces[i+1][j-1].dim();
                              allpieces[i-1][j+1].dim();
-                             allpieces[i-2][j+2].dim();
                              allpieces[i][j].matched = true;
                              allpieces[i+1][j-1].matched = true;
                              allpieces[i-1][j+1].matched = true;
-                             allpieces[i-2][j+2].matched = true;
                  
 #function for token dropping
 func ontokendrop(tokenpos):
    if abletogen == false:
-     var piece = storedpiece[0]
-     if len(allpieces[tokenpos]) < height:
+     var piece = storedpiece[0] 
+     if len(allpieces[tokenpos]) < height+1:
         #append piece to grid
         allpieces[tokenpos].append(piece);
         #tweening
@@ -136,6 +136,11 @@ func ontokendrop(tokenpos):
         #small delay then find match
         yield(get_tree().create_timer(0.7), "timeout")
         findmatches();
+        if gameovercheck() == true:
+           gameoverval = true
+           emit_signal("gameover", score)
+           return 0
+    
         #normal drop turn
         #token destruction loop, check false checks if there are avaliable destructible tokens
         while checkfalse() == true:
@@ -146,8 +151,19 @@ func ontokendrop(tokenpos):
              yield(get_tree().create_timer(0.1), "timeout")
              updatepositions();
              findmatches();
+             cascade += 1
+        cascade = 1
+        
         #on random drop
         randomdrop();
+        yield(get_tree().create_timer(0.7), "timeout")
+        findmatches();
+        gameovercheck();
+        if gameovercheck() == true:
+           gameoverval = true
+           emit_signal("gameover", score)
+           return 0
+        
         while checkfalse() == true:
              #short delays to simulate token falling
              #this timer is a reference and is destroyed once its executed!
@@ -156,8 +172,13 @@ func ontokendrop(tokenpos):
              yield(get_tree().create_timer(0.1), "timeout")
              updatepositions();
              findmatches();
+             cascade += 1
+        cascade = 1
+        
         storedpiece.clear()
+        yield(get_tree().create_timer(1.0), "timeout")
         abletogen = true;
+        get_node("/root/Node2D/Player").inputdelay = 0 
         #button enabler
         get_node("/root/Node2D/Button").disabled = false
         get_node("/root/Node2D/Button/debugblue").disabled = false
@@ -186,12 +207,14 @@ func removetokens():
         dummy.append([])
         for j in range (len(allpieces[i])):
             dummy[i].append(allpieces[i][j].matched)
-            
+    
     for i in width:
         for j in range(len(dummy[i])-1, -1 , -1):
             if dummy[i][j] == true:
                 allpieces[i][j].queue_free()
                 allpieces[i].remove(j)
+                score += cascade * 100
+                get_node("/root/Node2D/score").text = "Score: " + str(score)
                 
 #checks if theres any matched true tokens, if there is none end the token destruction loop               
 func checkfalse():
@@ -200,7 +223,13 @@ func checkfalse():
             if allpieces[i][j].matched == true:
                 return true;
     return false;
-
+    
+func gameovercheck():
+    for i in width:
+        if len(allpieces[i]) > height:
+            return true
+    return false
+    
 #random token drop
 func randomdrop():
     rng.randomize()

@@ -15,11 +15,13 @@ ProjectSettings.get_setting("display/window/size/width"),
 ProjectSettings.get_setting("display/window/size/height")
 );
 
+var inputdelay = 0;
+
 func _input(event):
     if controlnum == false:
-       if Input.is_action_pressed("ui_right") and positioning < 6:
+       if Input.is_action_just_pressed("ui_right") and positioning < 6:
           positioning += 1;
-       if Input.is_action_pressed("ui_left") and positioning > 0:
+       if Input.is_action_just_pressed("ui_left") and positioning > 0:
           positioning -= 1;
        self.global_position = Vector2(150 + positioning*100, self.global_position.y);
     elif controlnum == true:
@@ -40,8 +42,12 @@ func _input(event):
        self.global_position = Vector2(150 + positioning*100, self.global_position.y);
     emit_signal("changepiecepos", positioning);
     
-    if Input.is_action_pressed("ui_select"):
+    if Input.is_action_just_pressed("ui_select"):
+       if inputdelay <= 0 && get_node("/root/Node2D/grid").abletogen == false:
           emit_signal("tokendrop", positioning);
+          inputdelay += 1
+       else:
+          pass
     
     get_node("indicatorlabel").text = str(positioning+1)
     
