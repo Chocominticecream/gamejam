@@ -20,6 +20,9 @@ func _ready():
 func _on_CheckButton_toggled(button_pressed):
     numpadtoggle = !numpadtoggle
     get_node("/root/Node2D/Player").controlnum = numpadtoggle
-
+    if numpadtoggle == false:
+       get_node("/root/Node2D/controls").text = "WASD\nor arrow keys\nto move!\npress spacebar\nto drop!"
+    else:
+       get_node("/root/Node2D/controls").text = "Numpad 1-7\nto move!\npress spacebar\nto drop!"
 func _on_resume_pressed():
     self.is_paused = false

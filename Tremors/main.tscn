@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://board/boardtiles.tscn" type="PackedScene" id=2]
@@ -32,6 +32,14 @@ bg_color = Color( 0.337255, 0.360784, 0.364706, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.14902, 0.352941, 0.698039, 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 24
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 24
+font_data = ExtResource( 4 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -134,6 +142,28 @@ margin_right = 101.0
 margin_bottom = 126.0
 focus_mode = 0
 text = "purple"
+
+[node name="instructions" type="Label" parent="."]
+margin_left = 835.0
+margin_top = 337.0
+margin_right = 1116.0
+margin_bottom = 505.0
+custom_fonts/font = SubResource( 8 )
+text = "Match 3 vertically
+diagonally or
+horizontally!
+Press Esc to pause!"
+
+[node name="controls" type="Label" parent="."]
+margin_left = 837.0
+margin_top = 504.0
+margin_right = 994.0
+margin_bottom = 649.0
+custom_fonts/font = SubResource( 9 )
+text = "WASD 
+or arrow keys 
+to move!
+press "
 
 [connection signal="pressed" from="Button" to="grid" method="_on_Button_pressed"]
 [connection signal="pressed" from="Button/debugblue" to="grid" method="_on_debugblue_pressed"]
