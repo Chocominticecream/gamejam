@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tokenpiece/generictoken.tscn" type="PackedScene" id=1]
+[ext_resource path="res://circle-512.png" type="Texture" id=2]
+
+[node name="greentoken" instance=ExtResource( 1 )]
+modulate = Color( 0.239216, 0.760784, 0.27451, 1 )
+color = "Green"
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.125, 0.125 )
+texture = ExtResource( 2 )

@@ -1,0 +1,5 @@
+Coding to do list:
+
+optimise and change appropriate values of instance variables to enum 
+implement switch statements
+reimplement the wave system
