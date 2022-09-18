@@ -2,6 +2,11 @@
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://square-128.png" type="Texture" id=2]
+<<<<<<< Updated upstream
+=======
+[ext_resource path="res://arrow.png" type="Texture" id=3]
+[ext_resource path="res://OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=4]
+>>>>>>> Stashed changes
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -15,3 +20,19 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+<<<<<<< Updated upstream
+=======
+
+[node name="pointerarrow" type="Sprite" parent="."]
+position = Vector2( 0, -100 )
+scale = Vector2( 0.125, 0.125 )
+texture = ExtResource( 3 )
+
+[node name="indicatorlabel" type="Label" parent="."]
+margin_left = -11.0
+margin_top = -186.0
+margin_right = 18.0
+margin_bottom = -141.0
+custom_fonts/font = SubResource( 2 )
+text = "1"
+>>>>>>> Stashed changes
