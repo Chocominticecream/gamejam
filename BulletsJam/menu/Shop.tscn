@@ -29,7 +29,6 @@ margin_bottom = 522.0
 color = Color( 0.509804, 0.462745, 0.0705882, 1 )
 
 [node name="Label" type="Label" parent="."]
-visible = false
 margin_left = 344.0
 margin_top = 17.0
 margin_right = 666.0

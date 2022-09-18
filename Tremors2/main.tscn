@@ -1,0 +1,218 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://board/boardtiles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://grid.gd" type="Script" id=3]
+[ext_resource path="res://colorcanvas.gd" type="Script" id=4]
+[ext_resource path="res://colorindicator.gd" type="Script" id=5]
+[ext_resource path="res://menu/gameover.tscn" type="PackedScene" id=6]
+[ext_resource path="res://menu/pausemenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://blackspace.png" type="Texture" id=8]
+[ext_resource path="res://RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf" type="DynamicFontData" id=9]
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 24
+outline_size = 1
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+use_filter = true
+font_data = ExtResource( 9 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.129412, 0.482353, 0.635294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.129412, 0.482353, 0.635294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.337255, 0.360784, 0.364706, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.14902, 0.352941, 0.698039, 1 )
+
+[sub_resource type="DynamicFont" id=11]
+font_data = ExtResource( 9 )
+
+[sub_resource type="Environment" id=10]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 3.44
+glow_strength = 1.32
+
+[sub_resource type="DynamicFont" id=8]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=9]
+font_data = ExtResource( 9 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 150, 50 )
+z_index = -1
+controlnum = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 520, 290 )
+current = true
+zoom = Vector2( 1.1, 1.6 )
+editor_draw_limits = true
+
+[node name="boardslot" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.952941, 0.254902, 0.533333, 1 )
+self_modulate = Color( 0.9, 0.9, 0.9, 1 )
+z_index = 5
+z_as_relative = false
+tile_data = PoolIntArray( 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 1, 0, 393221, 1, 0, 393222, 1, 0, 393223, 1, 0 )
+
+[node name="grid" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource( 3 )
+
+[node name="colorcanvas" type="CanvasLayer" parent="."]
+script = ExtResource( 4 )
+
+[node name="colorindicator" type="Label" parent="colorcanvas"]
+margin_left = 820.0
+margin_top = 150.0
+margin_right = 953.0
+margin_bottom = 191.0
+custom_fonts/font = SubResource( 5 )
+text = "Current color: Blue
+"
+script = ExtResource( 5 )
+
+[node name="scorecanvas" type="CanvasLayer" parent="."]
+
+[node name="score" type="Label" parent="scorecanvas"]
+margin_left = 780.0
+margin_top = 260.0
+margin_right = 921.0
+margin_bottom = 313.0
+custom_fonts/font = SubResource( 7 )
+text = "Score: 0"
+
+[node name="pause" parent="." instance=ExtResource( 7 )]
+follow_viewport_enable = true
+
+[node name="gameover" parent="." instance=ExtResource( 6 )]
+
+[node name="Button" type="Button" parent="."]
+margin_left = 862.0
+margin_top = 107.0
+margin_right = 1012.0
+margin_bottom = 166.0
+focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Button"]
+
+[node name="Label" type="Label" parent="Button/CanvasLayer"]
+margin_left = 835.0
+margin_top = 195.0
+margin_right = 945.0
+margin_bottom = 214.0
+custom_fonts/font = SubResource( 11 )
+text = "Random button"
+
+[node name="debugblue" type="Button" parent="Button"]
+visible = false
+margin_left = 1.0
+margin_top = 74.0
+margin_right = 47.0
+margin_bottom = 94.0
+focus_mode = 0
+text = "blue"
+
+[node name="debugred" type="Button" parent="Button"]
+visible = false
+margin_left = 60.0
+margin_top = 74.0
+margin_right = 100.0
+margin_bottom = 94.0
+focus_mode = 0
+text = "red"
+
+[node name="debugyellow" type="Button" parent="Button"]
+visible = false
+margin_left = 112.0
+margin_top = 74.0
+margin_right = 154.0
+margin_bottom = 94.0
+focus_mode = 0
+text = "yellow"
+
+[node name="debuggreen" type="Button" parent="Button"]
+visible = false
+margin_left = 2.0
+margin_top = 105.0
+margin_right = 47.0
+margin_bottom = 125.0
+focus_mode = 0
+text = "green"
+
+[node name="debugpurple" type="Button" parent="Button"]
+visible = false
+margin_left = 60.0
+margin_top = 106.0
+margin_right = 101.0
+margin_bottom = 126.0
+focus_mode = 0
+text = "purple"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 10 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 587, 344 )
+scale = Vector2( 1.24902, 1 )
+z_index = -10
+texture = ExtResource( 8 )
+
+[node name="instructioncanvas" type="CanvasLayer" parent="."]
+
+[node name="instructions" type="Label" parent="instructioncanvas"]
+margin_left = 780.0
+margin_top = 320.0
+margin_right = 1073.0
+margin_bottom = 485.0
+custom_fonts/font = SubResource( 8 )
+text = "Match 3 vertically
+diagonally or
+horizontally!
+Press Esc to pause!"
+
+[node name="controlcanvas" type="CanvasLayer" parent="."]
+
+[node name="controls" type="Label" parent="controlcanvas"]
+margin_left = 780.0
+margin_top = 420.0
+margin_right = 959.0
+margin_bottom = 577.0
+custom_fonts/font = SubResource( 9 )
+text = "WASD 
+or arrow keys 
+to move!
+press spacebar
+to drop!"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="pressed" from="Button" to="grid" method="_on_Button_pressed"]
+[connection signal="pressed" from="Button/debugblue" to="grid" method="_on_debugblue_pressed"]
+[connection signal="pressed" from="Button/debugred" to="grid" method="_on_debugred_pressed"]
+[connection signal="pressed" from="Button/debugyellow" to="grid" method="_on_debugyellow_pressed"]
+[connection signal="pressed" from="Button/debuggreen" to="grid" method="_on_debuggreen_pressed"]
+[connection signal="pressed" from="Button/debugpurple" to="grid" method="_on_debugpurple_pressed"]
