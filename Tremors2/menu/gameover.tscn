@@ -24,7 +24,7 @@ script = ExtResource( 2 )
 [node name="ColorRect" type="ColorRect" parent="gameover"]
 margin_right = 300.0
 margin_bottom = 200.0
-color = Color( 0.403922, 0.0941176, 0.556863, 1 )
+color = Color( 0.6, 0.572549, 0.611765, 1 )
 
 [node name="finalscore" type="Label" parent="gameover"]
 margin_left = 87.0
