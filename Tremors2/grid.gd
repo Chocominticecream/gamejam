@@ -36,6 +36,13 @@ var score = 0
 var tokensdestroyed = 0
 
 # Called when the node enters the scene tree for the first time.
+enum{
+     dropping
+     notdropping
+     }
+    
+var state = notdropping
+
 func _ready():
     allpieces = make2DArray();
     print(allpieces);
@@ -124,6 +131,7 @@ func findmatches():
                  
 #function for token dropping
 func ontokendrop(tokenpos):
+   state = dropping
    if abletogen == false:
      var piece = storedpiece[0] 
      if len(allpieces[tokenpos]) < height+1:
@@ -185,11 +193,12 @@ func ontokendrop(tokenpos):
         get_node("/root/Node2D/Button/debugyellow").disabled = false
         get_node("/root/Node2D/Button/debuggreen").disabled = false
         get_node("/root/Node2D/Button/debugpurple").disabled = false
+        state = notdropping
     
 #function for updating piece position
 func onplayermove(positioner):
      #weakref checks if piece is freed
-     if storedpiece.size() > 0 && weakref(storedpiece[0]).get_ref():
+     if storedpiece.size() > 0 && weakref(storedpiece[0]).get_ref() and state == notdropping:
         storedpiece[0].position.x = 150 + positioner*100
         
 #update tokens and simulate falling of tokens

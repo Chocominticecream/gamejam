@@ -2,14 +2,15 @@
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://square-128.png" type="Texture" id=2]
-[ext_resource path="res://arrow.png" type="Texture" id=3]
+[ext_resource path="res://triangle-512.png" type="Texture" id=3]
 [ext_resource path="res://OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 32
+size = 64
+outline_size = 1
 use_filter = true
 font_data = ExtResource( 4 )
 
@@ -26,13 +27,14 @@ shape = SubResource( 1 )
 
 [node name="pointerarrow" type="Sprite" parent="."]
 position = Vector2( 0, -100 )
+rotation = 3.14159
 scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 3 )
 
 [node name="indicatorlabel" type="Label" parent="."]
-margin_left = -11.0
-margin_top = -186.0
-margin_right = 18.0
-margin_bottom = -141.0
+margin_left = -20.0
+margin_top = -220.0
+margin_right = 17.0
+margin_bottom = -132.0
 custom_fonts/font = SubResource( 2 )
 text = "1"
