@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://board/boardtiles.tscn" type="PackedScene" id=2]
@@ -9,11 +9,6 @@
 [ext_resource path="res://menu/pausemenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://blackspace.png" type="Texture" id=8]
 [ext_resource path="res://RobotoFlex-VariableFont_GRAD,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf" type="DynamicFontData" id=9]
-[ext_resource path="res://ParallaxBackground.gd" type="Script" id=10]
-[ext_resource path="res://circle-512.png" type="Texture" id=11]
-[ext_resource path="res://backgroundobj/square.tscn" type="PackedScene" id=12]
-[ext_resource path="res://backgroundobj/roundedsquare.tscn" type="PackedScene" id=13]
-[ext_resource path="res://backgroundobj/tinycircle.tscn" type="PackedScene" id=14]
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 9 )
@@ -58,9 +53,6 @@ font_data = ExtResource( 9 )
 font_data = ExtResource( 9 )
 
 [node name="Node2D" type="Node2D"]
-__meta__ = {
-"_edit_horizontal_guides_": [ 771.0, 767.0, 771.0 ]
-}
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 150, 50 )
@@ -74,6 +66,7 @@ zoom = Vector2( 1.1, 1.6 )
 editor_draw_limits = true
 
 [node name="boardslot" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.952941, 0.254902, 0.533333, 1 )
 self_modulate = Color( 0.9, 0.9, 0.9, 1 )
 z_index = 5
 z_as_relative = false
@@ -181,66 +174,12 @@ text = "purple"
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 10 )
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-script = ExtResource( 10 )
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 0, 1000 )
-
-[node name="background" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 608, 256.5 )
-scale = Vector2( 2.22461, 0.999023 )
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 587, 344 )
+scale = Vector2( 1.24902, 1 )
 z_index = -10
 texture = ExtResource( 8 )
-
-[node name="roundedsquare" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 13 )]
-position = Vector2( 2, 2 )
-
-[node name="square" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 12 )]
-position = Vector2( 290, 449 )
-
-[node name="Node2D" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 14 )]
-position = Vector2( 651, 286 )
-
-[node name="Node2D2" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 14 )]
-position = Vector2( 344, -74 )
-
-[node name="Node2D3" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 14 )]
-position = Vector2( 488, -328 )
-
-[node name="Node2D4" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 14 )]
-position = Vector2( 16, -5 )
-
-[node name="Node2D5" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 14 )]
-position = Vector2( 146, -269 )
-
-[node name="Node2D6" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 14 )]
-position = Vector2( 897, -74 )
-
-[node name="Node2D7" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 14 )]
-position = Vector2( -131, -384 )
-
-[node name="Node2D8" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 14 )]
-position = Vector2( -131, 270 )
-
-[node name="Node2D9" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 14 )]
-position = Vector2( 332, 284 )
-
-[node name="Node2D10" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 14 )]
-position = Vector2( 963, -531 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 836, 77 )
-scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 11 )
-
-[node name="roundedsquare2" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 13 )]
-position = Vector2( 974, 570 )
-
-[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 562, 257 )
-scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 11 )
 
 [node name="instructioncanvas" type="CanvasLayer" parent="."]
 
