@@ -39,3 +39,8 @@ The theme for the game jam is CHILLED, something icy i suppose, let it go amirit
 
 by the way, it is fine if we cannot make a game in time, all that matters is that we have fun and learn :)
 
+OTHER THINGS TODO (13/12/2023):
+fix conflicts
+
+the game can be played here:
+https://mintchocoicecream.itch.io/random-tokens
