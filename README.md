@@ -41,6 +41,7 @@ by the way, it is fine if we cannot make a game in time, all that matters is tha
 
 OTHER THINGS TODO (13/12/2023):
 fix conflicts
+currently all the code is on the "weihao" branch, to ber merged with the main branch
 
 the game can be played here:
 https://mintchocoicecream.itch.io/random-tokens
